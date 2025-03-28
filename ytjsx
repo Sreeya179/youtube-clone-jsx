@@ -1,0 +1,46 @@
+// App.js
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import VideoList from './components/VideoList';
+
+function App() {
+  const [videos, setVideos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    // Fetch videos from YouTube API or use mock data
+    const fetchVideos = async () => {
+      // In a real app, you would use the YouTube Data API here
+      const mockVideos = [
+        {
+          id: '1',
+          title: 'How to Build a YouTube Clone with React',
+          channel: 'CodeWithHarry',
+          views: '150K views',
+          timestamp: '3 days ago',
+          duration: '15:30',
+          thumbnail: 'https://i.ytimg.com/vi/1Rs2ND1ryYc/maxresdefault.jpg',
+          channelIcon: 'https://yt3.ggpht.com/ytc/AAUvwniFZkQzWXZ6weXkwH4SGQJQ9vZ6BQJ8YH6jZbhD=s88-c-k-c0x00ffffff-no-rj'
+        },
+        // Add more videos
+      ];
+      setVideos(mockVideos);
+    };
+
+    fetchVideos();
+  }, [searchTerm]);
+
+  return (
+    <div className="app">
+      <Header onSearch={setSearchTerm} />
+      <div className="app__page">
+        <Sidebar />
+        <VideoList videos={videos} />
+      </div>
+    </div>
+  );
+}
+
+export default App;
